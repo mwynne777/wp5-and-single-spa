@@ -1,18 +1,27 @@
 <script>
-import fruit from 'home/fruit';
-import store from 'store/store';
+  import { onMount } from "svelte";
 
-let image = store.image;
-store.subscribe(() => {
-  image = store.image;
-});
-const addToCart = () => {
-  store.incrementCount();
-};
+  import fruit from "home/fruit";
+  import store from "store/store";
+
+  let image = store.image;
+  store.subscribe(() => {
+    image = store.image;
+  });
+  const addToCart = () => {
+    store.incrementCount();
+  };
+
+  let Svelty = undefined;
+
+  onMount(async () => {
+    Svelty = (await import("svelty/comp")).default;
+  });
 </script>
+
 <div class="mui-panel">
   <div style="text-align: center;">
-    <img src={fruit[image].image} style="max-height: 200px;" />
+    <img src={fruit[image].image} alt="#" style="max-height: 200px;" />
   </div>
   <button
     on:click={addToCart}
@@ -22,3 +31,6 @@ const addToCart = () => {
     Add To Cart
   </button>
 </div>
+{#if Svelty}
+  <Svelty />
+{/if}

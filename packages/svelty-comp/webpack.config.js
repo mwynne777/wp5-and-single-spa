@@ -15,7 +15,7 @@ module.exports = {
   },
 
   output: {
-    publicPath: 'http://localhost:3004/'
+    publicPath: 'http://localhost:3006/'
   },
 
   resolve: {
@@ -43,16 +43,13 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'buyTools',
-      library: { type: 'var', name: 'buyTools' },
+      name: 'svelty',
+      library: { type: 'var', name: 'svelty' },
       filename: 'remoteEntry.js',
       remotes: {
-        home: 'home',
-        store: 'store',
-        svelty: 'svelty'
       },
       exposes: {
-        BuyTools: './src/index'
+        comp: './src/app.svelte'
       },
       shared: []
     }),
